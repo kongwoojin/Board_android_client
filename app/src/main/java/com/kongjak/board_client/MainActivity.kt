@@ -32,9 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        binding.fab.setOnClickListener {
-            getApi()
-        }
+        getApi()
 
         arrayList = ArrayList()
 
@@ -44,7 +42,6 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(baseContext, ArticleActivity::class.java)
                 intent.putExtra("id", id)
                 startActivity(intent)
-                Snackbar.make(view, id.toString(), Snackbar.LENGTH_LONG).show()
             }
         }
 
