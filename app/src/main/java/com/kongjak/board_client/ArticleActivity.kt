@@ -1,6 +1,8 @@
 package com.kongjak.board_client
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.kongjak.board_client.connections.RetrofitBuilder
@@ -33,7 +35,11 @@ class ArticleActivity : AppCompatActivity() {
             ) {
                 val data = response.body()
                 binding.titleTextView.text = data?.title
-                binding.textTextView.text = data?.text
+                binding.textTextView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                     Html.fromHtml(data?.text, Html.FROM_HTML_MODE_LEGACY)
+                } else {
+                    Html.fromHtml(data?.text)
+                }
                 binding.usernameTextView.text = data?.username
 
                 Log.d("response", data.toString())
